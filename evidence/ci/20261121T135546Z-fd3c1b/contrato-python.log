@@ -1,0 +1,72 @@
+test_activos_de_la_interfaz (test_contract.InventoryContract.test_activos_de_la_interfaz) ... ok
+test_campos_y_minimo_validos (test_contract.InventoryContract.test_campos_y_minimo_validos) ... ok
+test_cantidades_solo_enteras_positivas (test_contract.InventoryContract.test_cantidades_solo_enteras_positivas) ... ok
+test_catalogo_normaliza_codigo_y_rechaza_duplicados (test_contract.InventoryContract.test_catalogo_normaliza_codigo_y_rechaza_duplicados) ... ok
+test_cliente_previo_sin_folio (test_contract.InventoryContract.test_cliente_previo_sin_folio) ... ok
+test_dos_salidas_compiten_por_una_unidad (test_contract.InventoryContract.test_dos_salidas_compiten_por_una_unidad) ... ok
+test_escritura_desde_otro_origen (test_contract.InventoryContract.test_escritura_desde_otro_origen) ... ok
+test_folio_sin_formato_se_rechaza (test_contract.InventoryContract.test_folio_sin_formato_se_rechaza) ... FAIL
+test_historial_ordenado_y_motivo (test_contract.InventoryContract.test_historial_ordenado_y_motivo) ... ok
+test_json_malformado_y_tipo_de_contenido (test_contract.InventoryContract.test_json_malformado_y_tipo_de_contenido) ... ok
+test_mismo_folio_otro_contenido (test_contract.InventoryContract.test_mismo_folio_otro_contenido) ... FAIL
+test_producto_inexistente (test_contract.InventoryContract.test_producto_inexistente) ... ok
+test_reintento_mismo_folio_descuenta_una_sola_vez (test_contract.InventoryContract.test_reintento_mismo_folio_descuenta_una_sola_vez) ... FAIL
+test_reintentos_concurrentes (test_contract.InventoryContract.test_reintentos_concurrentes) ... FAIL
+test_saldo_minimo_inclusivo (test_contract.InventoryContract.test_saldo_minimo_inclusivo) ... ok
+test_salud_y_tablero_vacio (test_contract.InventoryContract.test_salud_y_tablero_vacio) ... ok
+test_stock_insuficiente_sin_asiento (test_contract.InventoryContract.test_stock_insuficiente_sin_asiento) ... ok
+
+======================================================================
+FAIL: test_folio_sin_formato_se_rechaza (test_contract.InventoryContract.test_folio_sin_formato_se_rechaza)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/9d21ba6872c8/trabajo/apf3/tests/test_contract.py", line 161, in test_folio_sin_formato_se_rechaza
+    self.assertEqual(self.move("entrada",3,"?")[0],400)
+AssertionError: 201 != 400
+
+======================================================================
+FAIL: test_mismo_folio_otro_contenido (test_contract.InventoryContract.test_mismo_folio_otro_contenido)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/9d21ba6872c8/trabajo/apf3/tests/test_contract.py", line 148, in test_mismo_folio_otro_contenido
+    self.assertEqual(self.move("entrada",21,key)[0],409)
+AssertionError: 201 != 409
+
+======================================================================
+FAIL: test_reintento_mismo_folio_descuenta_una_sola_vez (test_contract.InventoryContract.test_reintento_mismo_folio_descuenta_una_sola_vez)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/9d21ba6872c8/trabajo/apf3/tests/test_contract.py", line 141, in test_reintento_mismo_folio_descuenta_una_sola_vez
+    self.assertEqual((first[0],second[0],stats["units"],stats["movements"]),(201,200,14,2))
+AssertionError: Tuples differ: (201, 201, 8, 3) != (201, 200, 14, 2)
+
+First differing element 1:
+201
+200
+
+- (201, 201, 8, 3)
++ (201, 200, 14, 2)
+
+======================================================================
+FAIL: test_reintentos_concurrentes (test_contract.InventoryContract.test_reintentos_concurrentes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/9d21ba6872c8/trabajo/apf3/tests/test_contract.py", line 155, in test_reintentos_concurrentes
+    self.assertEqual(sorted(r[0] for r in replies),[200,201])
+AssertionError: Lists differ: [201, 201] != [200, 201]
+
+First differing element 0:
+201
+200
+
+- [201, 201]
+?    ^
+
++ [200, 201]
+?    ^
+
+
+----------------------------------------------------------------------
+Ran 17 tests in 0.966s
+
+FAILED (failures=4)

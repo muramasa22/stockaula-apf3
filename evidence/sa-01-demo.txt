@@ -1,0 +1,8 @@
+Entorno local temporal | StockAula
+Alta de MAT-001                        HTTP 201
+Entrada de 20 unidades                 HTTP 201
+Salida de 6 | folio salida-demo-001    HTTP 201 · movimiento 2
+Reenvío del mismo folio                HTTP 200 · movimiento 2
+Mismo folio con otra cantidad          HTTP 409
+Salida mayor que el saldo              HTTP 409
+Saldo final: 14 unidades | Movimientos guardados: 2

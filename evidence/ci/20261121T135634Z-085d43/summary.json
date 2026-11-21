@@ -1,0 +1,35 @@
+{
+  "run_id": "20261121T135634Z-085d43",
+  "commit": "eed330a05ce87dc0e1d05a93270e00c2c7faf91b",
+  "event": "git-post-commit",
+  "started_utc": "2026-11-21T13:56:34.307060+00:00",
+  "steps": [
+    {
+      "name": "sintaxis-python",
+      "exit_code": 0
+    },
+    {
+      "name": "sintaxis-interfaz",
+      "exit_code": 0
+    },
+    {
+      "name": "construccion-worker",
+      "exit_code": 0
+    },
+    {
+      "name": "sintaxis-worker",
+      "exit_code": 0
+    },
+    {
+      "name": "contrato-python",
+      "exit_code": 0
+    },
+    {
+      "name": "contrato-worker",
+      "exit_code": 0
+    }
+  ],
+  "status": "success",
+  "worker_sha256": "7c04e470cdd6a6a9ca75a07a16c3113c46a1c352e713ce7973066baa291c3c54",
+  "finished_utc": "2026-11-21T13:56:36.978974+00:00"
+}

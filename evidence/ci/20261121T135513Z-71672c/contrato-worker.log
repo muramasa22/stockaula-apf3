@@ -1,0 +1,17 @@
+test_activos_de_la_interfaz (test_contract.InventoryContract.test_activos_de_la_interfaz) ... ok
+test_campos_y_minimo_validos (test_contract.InventoryContract.test_campos_y_minimo_validos) ... ok
+test_cantidades_solo_enteras_positivas (test_contract.InventoryContract.test_cantidades_solo_enteras_positivas) ... ok
+test_catalogo_normaliza_codigo_y_rechaza_duplicados (test_contract.InventoryContract.test_catalogo_normaliza_codigo_y_rechaza_duplicados) ... ok
+test_dos_salidas_compiten_por_una_unidad (test_contract.InventoryContract.test_dos_salidas_compiten_por_una_unidad) ... ok
+test_escritura_desde_otro_origen (test_contract.InventoryContract.test_escritura_desde_otro_origen) ... ok
+test_historial_ordenado_y_motivo (test_contract.InventoryContract.test_historial_ordenado_y_motivo) ... ok
+test_json_malformado_y_tipo_de_contenido (test_contract.InventoryContract.test_json_malformado_y_tipo_de_contenido) ... ok
+test_producto_inexistente (test_contract.InventoryContract.test_producto_inexistente) ... ok
+test_saldo_minimo_inclusivo (test_contract.InventoryContract.test_saldo_minimo_inclusivo) ... ok
+test_salud_y_tablero_vacio (test_contract.InventoryContract.test_salud_y_tablero_vacio) ... ok
+test_stock_insuficiente_sin_asiento (test_contract.InventoryContract.test_stock_insuficiente_sin_asiento) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.902s
+
+OK
