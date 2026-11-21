@@ -131,3 +131,37 @@ class InventoryContract(unittest.TestCase):
             with request.urlopen(self.url+path,timeout=5) as reply:
                 self.assertEqual(reply.status,200)
                 self.assertIn(needle,reply.read())
+
+    def test_reintento_mismo_folio_descuenta_una_sola_vez(self):
+        self.product(); self.move("entrada",20)
+        key=str(uuid.uuid4())
+        first=self.move("salida",6,key)
+        second=self.move("salida",6,key)
+        stats=self.state()["stats"]
+        self.assertEqual((first[0],second[0],stats["units"],stats["movements"]),(201,200,14,2))
+        self.assertEqual(first[1]["id"],second[1]["id"])
+        self.assertTrue(second[1]["replayed"])
+
+    def test_mismo_folio_otro_contenido(self):
+        self.product(); key=str(uuid.uuid4())
+        self.move("entrada",20,key)
+        self.assertEqual(self.move("entrada",21,key)[0],409)
+        self.assertEqual(self.state()["stats"]["units"],20)
+
+    def test_reintentos_concurrentes(self):
+        self.product(); self.move("entrada",20); key=str(uuid.uuid4())
+        with concurrent.futures.ThreadPoolExecutor(2) as pool:
+            replies=list(pool.map(lambda _:self.move("salida",6,key),range(2)))
+        self.assertEqual(sorted(r[0] for r in replies),[200,201])
+        self.assertEqual(replies[0][1]["id"],replies[1][1]["id"])
+        self.assertEqual(self.state()["stats"]["units"],14)
+
+    def test_folio_sin_formato_se_rechaza(self):
+        self.product()
+        self.assertEqual(self.move("entrada",3,"?")[0],400)
+        self.assertEqual(self.state()["stats"]["movements"],0)
+
+    def test_cliente_previo_sin_folio(self):
+        self.product()
+        self.assertEqual(self.call("/api/movements",{"code":"MAT-001","kind":"entrada","quantity":8,"reason":"Reposición"})[0],201)
+        self.assertEqual(self.state()["stats"]["units"],8)

@@ -34,10 +34,19 @@ async function registerMovement(db, data) {
   const code = codeOf(data.code), kind = data.kind;
   if (!["entrada","salida"].includes(kind)) throw new Problem(400,"Selecciona entrada o salida.");
   const quantity = integer(data.quantity,1), reason = field(data.reason,LIMIT.maxReason);
+  const key = data.request_key ?? null;
+  if (Object.hasOwn(data,"request_key") && (typeof key !== "string" || !/^[A-Za-z0-9_-]{8,100}$/.test(key)))
+    throw new Problem(400,"La clave de operación no es válida.");
+  const row = await db.prepare(SQL.addMovement).bind(kind,quantity,reason,key,code,kind,quantity).first();
+  if (row) return json({id:row.id,replayed:false},201);
+  const previous = key ? await db.prepare(SQL.byRequestKey).bind(key).first() : null;
+  if (previous) {
+    if (previous.code !== code || previous.kind !== kind || previous.quantity !== quantity || previous.reason !== reason)
+      throw new Problem(409,"La clave ya identifica otro movimiento.");
+    return json({id:previous.id,replayed:true},200);
+  }
   if (!await db.prepare(SQL.getProduct).bind(code).first()) throw new Problem(404,"No se encontró el material.");
-  const row = await db.prepare(SQL.addMovement).bind(kind,quantity,reason,code,kind,quantity).first();
-  if (!row) throw new Problem(409,"Stock insuficiente para esta salida.");
-  return json({id:row.id},201);
+  throw new Problem(409,"Stock insuficiente para esta salida.");
 }
 export default {
   async fetch(request, env) {

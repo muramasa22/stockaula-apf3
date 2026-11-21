@@ -4,7 +4,6 @@ import json
 import re
 import sqlite3
 from contextlib import closing
-from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlsplit
@@ -92,12 +91,20 @@ def add_movement(db, data):
         raise RequestError(400, "Selecciona entrada o salida.")
     quantity = number(data.get("quantity"), 1)
     reason = text_field(data.get("reason"), LIMIT["maxReason"])
+    key = data.get("request_key")
+    if "request_key" in data and (not isinstance(key, str) or not re.fullmatch(r"[A-Za-z0-9_-]{8,100}", key)):
+        raise RequestError(400, "La clave de operación no es válida.")
+    row = db.execute(SQL["addMovement"], (kind, quantity, reason, key, code, kind, quantity)).fetchone()
+    if row:
+        return 201, {"id": row["id"], "replayed": False}
+    previous = db.execute(SQL["byRequestKey"], (key,)).fetchone() if key else None
+    if previous:
+        if (previous["code"], previous["kind"], previous["quantity"], previous["reason"]) != (code, kind, quantity, reason):
+            raise RequestError(409, "La clave ya identifica otro movimiento.")
+        return 200, {"id": previous["id"], "replayed": True}
     if not db.execute(SQL["getProduct"], (code,)).fetchone():
         raise RequestError(404, "No se encontró el material.")
-    result = db.execute(SQL["addMovement"], (kind, quantity, reason, code, kind, quantity)).fetchone()
-    if not result:
-        raise RequestError(409, "Stock insuficiente para esta salida.")
-    return 201, {"id": result["id"]}
+    raise RequestError(409, "Stock insuficiente para esta salida.")
 
 
 class Handler(BaseHTTPRequestHandler):

@@ -1,4 +1,4 @@
 id,tipo,prioridad,estado,responsable,resultado
-SA-01,Mejora funcional,Alta,Abierta,Leonardo Josue Minaya Ormeño,Evitar que un reintento de salida duplique el movimiento.
-SA-02,Tarea técnica,Alta,En validación,Leonardo Josue Minaya Ormeño,Ejecutar el mismo contrato de inventario en Python y en el Worker.
-SA-03,Tarea de entrega,Alta,Abierta,Leonardo Josue Minaya Ormeño,Publicar y verificar la versión candidata en el entorno de prueba.
+SA-01,Mejora funcional,Alta,Cerrada,Leonardo Josue Minaya Ormeño,eed330a impide el segundo descuento. Véase SA-01.md.
+SA-02,Tarea técnica,Alta,Cerrada,Leonardo Josue Minaya Ormeño,fb32671 incorpora la CI. El contrato ampliado pasa en los dos servidores.
+SA-03,Tarea de entrega,Alta,En curso,Leonardo Josue Minaya Ormeño,Publicar y verificar la versión candidata en el entorno de prueba.
