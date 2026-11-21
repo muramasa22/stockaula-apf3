@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#073e3b"><title>StockAula · Inventario universitario</title>
+  <link rel="stylesheet" href="/style.css"><script defer src="/app.js"></script>
+</head>
+<body>
+<header class="mast"><div class="mast-inner"><a class="brand" href="/"><span class="brand-icon" aria-hidden="true"><i></i><i></i><i></i></span>StockAula</a><span class="environment">Entorno de prueba</span></div></header>
+<main>
+  <div class="intro"><div><p class="eyebrow">Almacén universitario</p><h1>Inventario de materiales</h1></div>
+    <div class="actions"><button id="new-product" class="secondary">Nuevo material</button><button id="new-movement" class="primary">Registrar movimiento</button></div>
+  </div>
+  <section class="summary" aria-label="Indicadores de inventario">
+    <div><span>Materiales registrados</span><strong id="stat-products">—</strong></div>
+    <div><span>Unidades disponibles</span><strong id="stat-units">—</strong></div>
+    <div class="alert-stat"><span>Por reponer</span><strong id="stat-alerts">—</strong></div>
+    <div><span>Movimientos</span><strong id="stat-movements">—</strong></div>
+  </section>
+  <p id="notice" role="status" hidden></p>
+  <section class="panel">
+    <nav class="tabs" aria-label="Vistas del almacén"><button aria-pressed="true" data-view="catalog">Catálogo</button><button aria-pressed="false" data-view="history">Historial</button></nav>
+    <section id="catalog">
+      <div class="tools"><label class="search"><span>Buscar material</span><input id="search" type="search" placeholder="Nombre o código"></label><label class="check"><input type="checkbox" id="only-low"> Solo por reponer</label></div>
+      <div class="table-scroll"><table><thead><tr><th>Código</th><th>Material</th><th>Categoría</th><th class="num">Stock</th><th class="num">Mínimo</th><th>Estado</th></tr></thead><tbody id="materials"></tbody></table></div>
+      <div id="catalog-empty" class="empty" hidden><h2>Aún no hay materiales</h2><p>Registra el primer material para empezar a controlar sus existencias.</p></div>
+    </section>
+    <section id="history" hidden><div class="history-header"><h2>Movimientos recientes</h2><span>Últimos 100 registros</span></div><div class="table-scroll"><table><thead><tr><th>Fecha y hora</th><th>Material</th><th>Operación</th><th class="num">Cantidad</th><th>Motivo</th></tr></thead><tbody id="movement-list"></tbody></table></div><div class="empty" id="history-empty" hidden><h2>Sin movimientos todavía</h2><p>Las entradas y salidas confirmadas aparecerán aquí.</p></div></section>
+  </section>
+  <footer><span>StockAula · Control de inventario</span><span>Versión 0.3.0-rc.1</span></footer>
+</main>
+<dialog id="product-dialog" aria-labelledby="product-heading"><form id="product-form"><div class="dialog-head"><h2 id="product-heading">Nuevo material</h2><button type="button" data-close aria-label="Cerrar">×</button></div>
+<label>Código<input name="code" required maxlength="24" placeholder="MAT-001" autocomplete="off"></label>
+<label>Nombre del material<input name="name" required maxlength="90" placeholder="Papel bond A4"></label>
+<label>Categoría<input name="category" required maxlength="60" placeholder="Papelería"></label>
+<label>Stock mínimo<input name="minimum" type="number" required min="0" max="999999" step="1" value="0"></label>
+<p class="form-error" role="alert" hidden></p><div class="form-actions"><button type="button" class="secondary" data-close>Cancelar</button><button class="primary" type="submit">Guardar material</button></div></form></dialog>
+<dialog id="movement-dialog" aria-labelledby="movement-heading"><form id="movement-form"><div class="dialog-head"><h2 id="movement-heading">Registrar movimiento</h2><button type="button" data-close aria-label="Cerrar">×</button></div>
+<label>Material<select name="code" required></select></label>
+<label>Operación<select name="kind"><option value="entrada">Entrada</option><option value="salida">Salida</option></select></label>
+<label>Cantidad<input name="quantity" type="number" required min="1" max="999999" step="1"></label>
+<label>Motivo<input name="reason" required maxlength="180" placeholder="Entrega al laboratorio"></label>
+<p class="form-error" role="alert" hidden></p><div class="form-actions"><button type="button" class="secondary" data-close>Cancelar</button><button class="primary" type="submit">Confirmar movimiento</button></div></form></dialog>
+</body></html>

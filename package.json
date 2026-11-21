@@ -1,0 +1,1 @@
+{"name":"stockaula-apf3","version":"0.3.0-rc.1","private":true,"type":"module","scripts":{"build":"node scripts/build.mjs","test":"python3 scripts/ci.py"}}

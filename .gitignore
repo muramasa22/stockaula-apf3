@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+data/
+dist/
+runs/
+*.sqlite*
+*.db
+.env
+.dev.vars
+node_modules/
+.wrangler/
+.sites-runtime/
