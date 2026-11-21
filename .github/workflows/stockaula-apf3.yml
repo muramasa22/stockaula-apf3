@@ -1,0 +1,56 @@
+name: StockAula · integración y entrega
+on:
+  push:
+    branches: [main, 'fix/**', 'feature/**']
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - uses: actions/setup-node@v4
+        with: {node-version: '24'}
+      - name: Probar contratos y compilar
+        run: python scripts/ci.py --event github-actions
+      - name: Conservar bitácora
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bitacora-ci
+          path: runs/
+      - name: Empaquetar versión verificada
+        run: |
+          mkdir -p dist/.openai
+          cp -R drizzle dist/.openai/drizzle
+          tar -czf stockaula-site.tar.gz dist
+      - name: Entregar artefacto de publicación
+        uses: actions/upload-artifact@v4
+        with:
+          name: stockaula-cloud
+          path: stockaula-site.tar.gz
+  entregar:
+    needs: validar
+    if: startsWith(github.ref, 'refs/tags/v')
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: stockaula-cloud
+      - name: Publicar candidata y paquete en GitHub Releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          if ! gh release view "$TAG" >/dev/null 2>&1; then
+            gh release create "$TAG" --verify-tag --prerelease --title "StockAula $TAG" --notes "Candidata del inventario universitario."
+          fi
+          gh release upload "$TAG" stockaula-site.tar.gz --clobber

@@ -1,0 +1,4 @@
+id,tipo,prioridad,estado,responsable,resultado
+SA-01,Mejora funcional,Alta,Abierta,Leonardo Josue Minaya Ormeño,Evitar que un reintento de salida duplique el movimiento.
+SA-02,Tarea técnica,Alta,En validación,Leonardo Josue Minaya Ormeño,Ejecutar el mismo contrato de inventario en Python y en el Worker.
+SA-03,Tarea de entrega,Alta,Abierta,Leonardo Josue Minaya Ormeño,Publicar y verificar la versión candidata en el entorno de prueba.
