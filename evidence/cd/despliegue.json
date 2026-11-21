@@ -1,0 +1,32 @@
+{
+  "deployment": {
+    "id": "appgdep_6b01a3a0c8808191aa306870e205290d",
+    "project_id": "appgprj_6b01a166164c81919978b60383b8bbaa",
+    "status": "succeeded",
+    "type": "publish",
+    "version_id": "appgprj_6b01a166164c81919978b60383b8bbaa~appgver_7e0e38dfbb5c8191bf7a0db21f4fc3d4",
+    "updated_at": "2026-11-21T13:59:13.920473+00:00",
+    "url": "https://stockaula-inventario.melizadasme960886.chatgpt.site",
+    "failure_message": null
+  },
+  "version": {
+    "version_number": 1,
+    "id": "appgprj_6b01a166164c81919978b60383b8bbaa~appgver_7e0e38dfbb5c8191bf7a0db21f4fc3d4",
+    "source": {
+      "commit_sha": "7c18c363c41cd36e62a55c4a3fad73795784913b"
+    },
+    "deployment_id": "appgdep_6b01a3a0c8808191aa306870e205290d",
+    "archive": {
+      "content_hash": "sha256:12076bf001f77bfffa2467f210caad38ee04f6034b8b9fcf3e3539fbc4cae891",
+      "size_bytes": 30720
+    }
+  },
+  "access": "owner_only",
+  "cloud_database": {
+    "binding": "DB",
+    "tables": [
+      "movements",
+      "products"
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+test_activos_de_la_interfaz (test_contract.InventoryContract.test_activos_de_la_interfaz) ... ok
+test_campos_y_minimo_validos (test_contract.InventoryContract.test_campos_y_minimo_validos) ... ok
+test_cantidades_solo_enteras_positivas (test_contract.InventoryContract.test_cantidades_solo_enteras_positivas) ... ok
+test_catalogo_normaliza_codigo_y_rechaza_duplicados (test_contract.InventoryContract.test_catalogo_normaliza_codigo_y_rechaza_duplicados) ... ok
+test_cliente_previo_sin_folio (test_contract.InventoryContract.test_cliente_previo_sin_folio) ... ok
+test_dos_salidas_compiten_por_una_unidad (test_contract.InventoryContract.test_dos_salidas_compiten_por_una_unidad) ... ok
+test_escritura_desde_otro_origen (test_contract.InventoryContract.test_escritura_desde_otro_origen) ... ok
+test_folio_sin_formato_se_rechaza (test_contract.InventoryContract.test_folio_sin_formato_se_rechaza) ... ok
+test_historial_ordenado_y_motivo (test_contract.InventoryContract.test_historial_ordenado_y_motivo) ... ok
+test_json_malformado_y_tipo_de_contenido (test_contract.InventoryContract.test_json_malformado_y_tipo_de_contenido) ... ok
+test_mismo_folio_otro_contenido (test_contract.InventoryContract.test_mismo_folio_otro_contenido) ... ok
+test_producto_inexistente (test_contract.InventoryContract.test_producto_inexistente) ... ok
+test_reintento_mismo_folio_descuenta_una_sola_vez (test_contract.InventoryContract.test_reintento_mismo_folio_descuenta_una_sola_vez) ... ok
+test_reintentos_concurrentes (test_contract.InventoryContract.test_reintentos_concurrentes) ... ok
+test_saldo_minimo_inclusivo (test_contract.InventoryContract.test_saldo_minimo_inclusivo) ... ok
+test_salud_y_tablero_vacio (test_contract.InventoryContract.test_salud_y_tablero_vacio) ... ok
+test_stock_insuficiente_sin_asiento (test_contract.InventoryContract.test_stock_insuficiente_sin_asiento) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 0.967s
+
+OK

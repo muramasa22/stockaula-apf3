@@ -1,0 +1,30 @@
+[
+  {
+    "utc": "2026-11-21T14:00:08.298Z",
+    "method": "GET",
+    "path": "/style.css",
+    "http_status": 200,
+    "outcome": "ok"
+  },
+  {
+    "utc": "2026-11-21T14:00:02.206Z",
+    "method": "GET",
+    "path": "/api/state",
+    "http_status": 200,
+    "outcome": "ok"
+  },
+  {
+    "utc": "2026-11-21T14:00:02.017Z",
+    "method": "GET",
+    "path": "/app.js",
+    "http_status": 200,
+    "outcome": "ok"
+  },
+  {
+    "utc": "2026-11-21T14:00:01.955Z",
+    "method": "GET",
+    "path": "/",
+    "http_status": 200,
+    "outcome": "ok"
+  }
+]

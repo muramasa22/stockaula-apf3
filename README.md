@@ -4,6 +4,16 @@
 
 StockAula registra materiales, entradas y salidas para un almacén universitario. El catálogo permite buscar por nombre o código y filtrar materiales en reposición (saldo menor o igual al mínimo). El panel muestra productos, unidades, alertas y movimientos. El historial consulta los últimos 100 movimientos.
 
+## Abrir la entrega del curso
+
+Descomprime el ZIP completo y abre una terminal dentro de la carpeta **StockAula**. El ZIP incluye el directorio Git con ramas y etiqueta. La rama abierta, `evidencias/apf3`, añade al código publicado el recibo de nube y el registro final. `main` conserva el commit exacto que ejecuta la nube. El remoto académico del APF2 queda pendiente de integración (SA-04).
+
+- Incidencias al cierre: `issues/registro.csv`. Ejemplo trazado: `issues/SA-01.md`.
+- Cinco ejecuciones hasta la publicación: `evidence/ci/`. Cada directorio incluye el resumen JSON y la salida de cada etapa.
+- Evidencia de publicación: `evidence/cd/despliegue.json`, `solicitudes.json` y `primera-vista.jpg`.
+- Verifica procedencia con `git rev-parse v0.3.0-rc.1^{commit}` (en PowerShell, usa comillas alrededor de la referencia) y compara el resultado con `source.commit_sha` en el recibo.
+- Para continuar la revisión del APF2, abre una rama desde el `main` vigente del repositorio académico y compara los archivos antes de importar la candidata. El historial de esta copia empieza en la reconstrucción del APF3.
+
 ## Ejecutar en tu equipo
 
 Requisitos: Python 3.10 o posterior y Git. Para los dos contratos del pipeline se usan Python 3.12 y Node.js 24. El programa usa bibliotecas estándar.

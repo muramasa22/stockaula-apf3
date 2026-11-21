@@ -1,4 +1,5 @@
 id,tipo,prioridad,estado,responsable,resultado
 SA-01,Mejora funcional,Alta,Cerrada,Leonardo Josue Minaya Ormeño,eed330a impide el segundo descuento. Véase SA-01.md.
 SA-02,Tarea técnica,Alta,Cerrada,Leonardo Josue Minaya Ormeño,fb32671 incorpora la CI. El contrato ampliado pasa en los dos servidores.
-SA-03,Tarea de entrega,Alta,En curso,Leonardo Josue Minaya Ormeño,Publicar y verificar la versión candidata en el entorno de prueba.
+SA-03,Tarea de entrega,Alta,Cerrada,Leonardo Josue Minaya Ormeño,Candidata 7c18c36 publicada. GET /api/state respondió 200. Ver evidence/cd/.
+SA-04,Integración con el curso,Alta,Pendiente de acceso,Leonardo Josue Minaya Ormeño,Integrar la candidata al repositorio académico del APF2 y registrar una ejecución en GitHub Actions. El enlace devolvió 404 desde la sesión disponible.
