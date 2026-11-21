@@ -4,5 +4,6 @@
   "catalog": "SELECT * FROM inventory ORDER BY name COLLATE NOCASE, code",
   "recent": "SELECT m.id, m.code, p.name, m.kind, m.quantity, m.reason, m.created_at FROM movements m JOIN products p ON p.code = m.code ORDER BY m.id DESC LIMIT 100",
   "statistics": "SELECT COUNT(*) AS products, COALESCE(SUM(stock),0) AS units, COALESCE(SUM(stock <= minimum),0) AS alerts, (SELECT COUNT(*) FROM movements) AS movements FROM inventory",
-  "addMovement": "INSERT INTO movements(code, kind, quantity, reason) SELECT code, ?, ?, ? FROM inventory WHERE code = ? AND (? = 'entrada' OR stock >= ?) RETURNING id"
+  "addMovement": "INSERT INTO movements(code, kind, quantity, reason, request_key) SELECT code, ?, ?, ?, ? FROM inventory WHERE code = ? AND (? = 'entrada' OR stock >= ?) ON CONFLICT(request_key) DO NOTHING RETURNING id",
+  "byRequestKey": "SELECT id, code, kind, quantity, reason FROM movements WHERE request_key = ?"
 }

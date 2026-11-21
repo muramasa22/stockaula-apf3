@@ -3,6 +3,14 @@ const byId = id => document.getElementById(id);
 const productForm = byId("product-form"), movementForm = byId("movement-form");
 let inventory = {products:[],movements:[],stats:{}};
 let pending = null;
+try { pending=JSON.parse(sessionStorage.getItem("stockaula-pendiente")); } catch {}
+function rememberPending(value) {
+  pending=value;
+  try {
+    if (value) sessionStorage.setItem("stockaula-pendiente",JSON.stringify(value));
+    else sessionStorage.removeItem("stockaula-pendiente");
+  } catch {}
+}
 const formatter = new Intl.DateTimeFormat("es-PE",{dateStyle:"short",timeStyle:"short",timeZone:"America/Lima"});
 function element(tag,text,className) {
   const item = document.createElement(tag); item.textContent = text;
@@ -64,13 +72,13 @@ for(const form of [productForm,movementForm]) form.onsubmit=async event=>{
   if(movement) {
     data.quantity=Number(data.quantity);
     const signature=JSON.stringify(data);
-    if(!pending || pending.signature!==signature) pending={signature,key:crypto.randomUUID()};
+    if(!pending || pending.signature!==signature) rememberPending({signature,key:crypto.randomUUID()});
     data.request_key=pending.key;
   } else data.minimum=Number(data.minimum);
   button.disabled=true;
   try {
     const reply=await api(movement?"/api/movements":"/api/products",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});
-    if(movement) pending=null;
+    if(movement) rememberPending(null);
     form.closest("dialog").close();
     notify(movement ? (reply.replayed?"Movimiento ya registrado.":"Movimiento registrado.") : "Material registrado.");
     try {await refresh();} catch {notify("Se guardó la operación. Recarga la página para actualizar los indicadores.",true);}
